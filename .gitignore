@@ -1,0 +1,36 @@
+# === Global ===
+*.log
+*.tmp
+*.swp
+.DS_Store
+Thumbs.db
+.idea/
+.vscode/
+node_modules/
+dist/
+.env
+
+# === Backend (Spring Boot) ===
+PidevMicroService-gestionAgence-3/target/
+PidevMicroService-gestionAgence-3/.classpath
+PidevMicroService-gestionAgence-3/.project
+PidevMicroService-gestionAgence-3/.settings/
+PidevMicroService-gestionAgence-3/.mvn/
+PidevMicroService-gestionAgence-3/mvnw
+PidevMicroService-gestionAgence-3/mvnw.cmd
+
+# Ignore IntelliJ and Eclipse config in backend
+backend/.idea/
+backend/*.iml
+
+# === Frontend (Angular) ===
+PidevFront-GestionAgence/node_modules/
+PidevFront-GestionAgence/dist/
+PidevFront-GestionAgence/.angular/
+PidevFront-GestionAgence/.env
+PidevFront-GestionAgence/.env.*.local
+
+# Ignore build and IDE files
+PidevFront-GestionAgence/.idea/
+PidevFront-GestionAgence/.vscode/
+PidevFront-GestionAgence/*.iml

@@ -1,0 +1,109 @@
+<h2 mat-dialog-title>Détails de l'agence: {{ data.agence.nomAgence }}</h2>
+
+<mat-progress-bar mode="indeterminate" *ngIf="isLoading"></mat-progress-bar>
+
+<mat-dialog-content>
+  <div class="agency-details">
+    <div class="agency-info">
+      <h3>Informations générales</h3>
+      <div class="info-grid">
+        <div class="info-item">
+          <span class="label">Adresse:</span>
+          <span class="value">{{ data.agence.adresse }}</span>
+        </div>
+        <div class="info-item">
+          <span class="label">Ville:</span>
+          <span class="value">{{ data.agence.ville }}</span>
+        </div>
+        <div class="info-item">
+          <span class="label">Code Postal:</span>
+          <span class="value">{{ data.agence.codePostal }}</span>
+        </div>
+        <div class="info-item">
+          <span class="label">Téléphone:</span>
+          <span class="value">{{ data.agence.telephone }}</span>
+        </div>
+        <div class="info-item">
+          <span class="label">Email:</span>
+          <span class="value">{{ data.agence.email }}</span>
+        </div>
+        <div class="info-item">
+          <span class="label">Responsable:</span>
+          <span class="value">{{ data.agence.responsable }}</span>
+        </div>
+        <div class="info-item">
+          <span class="label">Date de création:</span>
+          <span class="value">{{ data.agence.dateCreation | date:'dd/MM/yyyy' }}</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="performance-summary">
+      <h3>Résumé des performances</h3>
+      
+      <div class="date-range">
+        <mat-form-field appearance="outline">
+          <mat-label>Date de début</mat-label>
+          <input matInput [matDatepicker]="startPicker" [formControl]="startDate">
+          <mat-datepicker-toggle matSuffix [for]="startPicker"></mat-datepicker-toggle>
+          <mat-datepicker #startPicker></mat-datepicker>
+        </mat-form-field>
+        
+        <mat-form-field appearance="outline">
+          <mat-label>Date de fin</mat-label>
+          <input matInput [matDatepicker]="endPicker" [formControl]="endDate">
+          <mat-datepicker-toggle matSuffix [for]="endPicker"></mat-datepicker-toggle>
+          <mat-datepicker #endPicker></mat-datepicker>
+        </mat-form-field>
+        
+        <button mat-raised-button color="primary" (click)="onDateChange()">Appliquer</button>
+      </div>
+      
+      <div class="performance-metrics" *ngIf="agencePerformance">
+        <div class="metric">
+          <div class="metric-value">{{ agencePerformance.chiffreAffaireTotal | number:'1.2-2' }} €</div>
+          <div class="metric-label">Chiffre d'affaires</div>
+        </div>
+        <div class="metric">
+          <div class="metric-value">{{ agencePerformance.nombreContratsTotal }}</div>
+          <div class="metric-label">Contrats signés</div>
+        </div>
+      </div>
+      
+      <div class="no-data" *ngIf="!agencePerformance && !isLoading">
+        <mat-icon>warning</mat-icon>
+        <p>Aucune donnée de performance disponible pour cette période.</p>
+      </div>
+    </div>
+
+    <div class="performance-details">
+      <h3>Historique des performances</h3>
+      
+      <table class="performance-table" *ngIf="performances.length > 0">
+        <thead>
+          <tr>
+            <th>Période</th>
+            <th>Chiffre d'affaires</th>
+            <th>Contrats signés</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let perf of performances">
+            <td>{{ perf.dateDebut | date:'dd/MM/yyyy' }} - {{ perf.dateFin | date:'dd/MM/yyyy' }}</td>
+            <td>{{ perf.chiffreAffaire | number:'1.2-2' }} €</td>
+            <td>{{ perf.nombreContrats }}</td>
+          </tr>
+        </tbody>
+      </table>
+      
+      <div class="no-data" *ngIf="performances.length === 0 && !isLoading">
+        <mat-icon>warning</mat-icon>
+        <p>Aucune donnée de performance disponible.</p>
+      </div>
+    </div>
+  </div>
+</mat-dialog-content>
+
+<mat-dialog-actions align="end">
+  <button mat-button (click)="closeDialog()">Fermer</button>
+</mat-dialog-actions> 

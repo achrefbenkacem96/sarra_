@@ -1,0 +1,78 @@
+<h2 mat-dialog-title>{{ dialogTitle }}</h2>
+
+<form [formGroup]="agenceForm" (ngSubmit)="onSubmit()">
+  <mat-dialog-content>
+    <!-- Nom de l'agence -->
+    <mat-form-field appearance="fill" class="full-width">
+      <mat-label>Nom de l'agence</mat-label>
+      <input matInput formControlName="nomAgence" required>
+      <mat-error *ngIf="agenceForm.get('nomAgence')?.hasError('required')">
+        Le nom de l'agence est requis
+      </mat-error>
+    </mat-form-field>
+
+    <!-- Adresse -->
+    <mat-form-field appearance="fill" class="full-width">
+      <mat-label>Adresse</mat-label>
+      <input matInput formControlName="adresse" required>
+      <mat-error *ngIf="agenceForm.get('adresse')?.hasError('required')">
+        L'adresse est requise
+      </mat-error>
+    </mat-form-field>
+
+    <!-- Ville -->
+    <mat-form-field appearance="fill" class="half-width">
+      <mat-label>Ville</mat-label>
+      <input matInput formControlName="ville" required>
+      <mat-error *ngIf="agenceForm.get('ville')?.hasError('required')">
+        La ville est requise
+      </mat-error>
+    </mat-form-field>
+
+    <!-- Code Postal -->
+    <mat-form-field appearance="fill" class="half-width">
+      <mat-label>Code Postal</mat-label>
+      <input matInput formControlName="codePostal" required>
+      <mat-error *ngIf="agenceForm.get('codePostal')?.hasError('required')">
+        Le code postal est requis
+      </mat-error>
+    </mat-form-field>
+
+    <!-- Téléphone -->
+    <mat-form-field appearance="fill" class="half-width">
+      <mat-label>Téléphone</mat-label>
+      <input matInput type="tel" formControlName="telephone" required>
+      <mat-error *ngIf="agenceForm.get('telephone')?.hasError('required')">
+        Le téléphone est requis
+      </mat-error>
+    </mat-form-field>
+
+    <!-- Email -->
+    <mat-form-field appearance="fill" class="half-width">
+      <mat-label>Email</mat-label>
+      <input matInput type="email" formControlName="email" required>
+      <mat-error *ngIf="agenceForm.get('email')?.hasError('required')">
+        L'email est requis
+      </mat-error>
+      <mat-error *ngIf="agenceForm.get('email')?.hasError('email')">
+        Format d'email invalide
+      </mat-error>
+    </mat-form-field>
+
+    <!-- Responsable -->
+    <mat-form-field appearance="fill" class="full-width">
+      <mat-label>Responsable</mat-label>
+      <input matInput formControlName="responsable" required>
+      <mat-error *ngIf="agenceForm.get('responsable')?.hasError('required')">
+        Le responsable est requis
+      </mat-error>
+    </mat-form-field>
+  </mat-dialog-content>
+
+  <mat-dialog-actions align="end">
+    <button mat-button type="button" (click)="onCancel()">Annuler</button>
+    <button mat-raised-button color="primary" type="submit" [disabled]="agenceForm.invalid">
+      {{ data.isEditMode ? 'Modifier' : 'Ajouter' }}
+    </button>
+  </mat-dialog-actions>
+</form> 

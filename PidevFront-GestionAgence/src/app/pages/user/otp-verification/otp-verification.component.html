@@ -1,0 +1,31 @@
+<div class="otp-container">
+    <form [formGroup]="otpForm" (ngSubmit)="onSubmit()" class="otp-form">
+      <h2>Verify Your Account</h2>
+      <div class="form-group">
+        <label for="otp">Enter OTP:</label>
+        <input id="otp" type="text" formControlName="otp" class="otp-input" [disabled]="isResend">
+      
+      </div>
+   
+      <button type="submit" class="submit-btn" [disabled]="loading || isResend">
+        {{ loading ? 'Verifying...' : 'Verify Account' }}
+      </button>
+      <button type="button" (click)="resendOtp()" [disabled]="resendLoading || isResend" class="resend-btn">
+        {{ resendLoading ? 'Resending OTP...' : 'Resend OTP' }}
+      </button>
+      <!-- Success Message -->
+      <div *ngIf="message && messageType === 'success'" class="success-message">
+        ✅ {{ message }}
+      </div>
+      <div *ngIf="message && messageType === 'error'" class="error-message">
+        ❌ {{ message }}
+      </div>
+      
+      <div *ngIf="otpForm.get('otp')?.touched && otpForm.get('otp')?.invalid" class="error-message">
+        <small class="error-message">OTP is required.</small>
+      </div>
+      <!-- Loading Spinner -->
+     
+    </form>
+  </div>
+  

@@ -1,0 +1,118 @@
+// Center the form
+.otp-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    background-color: #f4f4f4;
+  }
+  
+  // Form styling
+  .otp-form {
+    background: white;
+    padding: 2rem;
+    border-radius: 8px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    width: 100%;
+    max-width: 400px;
+    text-align: center;
+  }
+  
+  // Form title
+  h2 {
+    color: #004a8d;
+    margin-bottom: 20px;
+  }
+  
+  // Input field styling
+  .otp-input {
+    width: 100%;
+    padding: 10px;
+    border: 2px solid #004a8d;
+    border-radius: 5px;
+    font-size: 16px;
+    margin-top: 5px;
+  }
+  
+  // Button styling
+  .submit-btn {
+    width: 100%;
+    background-color: #004a8d;
+    color: white;
+    padding: 10px;
+    border: none;
+    border-radius: 5px;
+    font-size: 18px;
+    margin-top: 15px;
+    cursor: pointer;
+    transition: 0.3s ease-in-out;
+  }
+  
+  .submit-btn:hover {
+    background-color: #f38f1d;
+  }
+  
+  // Error message styling
+  .error-message {
+    color: red;
+    font-size: 14px;
+    margin-top: 5px;
+  }
+  
+  // Success message styling
+  .success-message {
+    background: #d4edda;
+    color: #155724;
+    padding: 10px;
+    margin-top: 10px;
+    border-radius: 5px;
+    font-size: 14px;
+  }
+  
+  .error-message {
+    background: #f8d7da;
+    color: #721c24;
+    padding: 10px;
+    margin-top: 10px;
+    border-radius: 5px;
+    font-size: 14px;
+  }
+  
+  // Loading spinner
+  .loading-spinner {
+    display: flex;
+    justify-content: center;
+    margin-top: 15px;
+  }
+  
+  .loading-spinner img {
+    width: 40px;
+    height: 40px;
+    animation: spin 1s linear infinite;
+  }
+  
+  // Spinner animation
+  @keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+  }
+  .resend-btn {
+    background: transparent;
+    color: #004a8d;
+    border: none;
+    font-size: 14px;
+    cursor: pointer;
+    text-decoration: underline;
+    margin-top: 10px;
+    transition: 0.3s ease;
+  
+    &:hover {
+      color: #f38f1d;
+    }
+  
+    &:disabled {
+      color: #d3d3d3;
+      cursor: not-allowed;
+    }
+  }
+  

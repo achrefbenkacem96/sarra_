@@ -1,0 +1,71 @@
+<h2 mat-dialog-title>{{ dialogTitle }}</h2>
+
+<form [formGroup]="performanceForm" (ngSubmit)="onSubmit()">
+  <mat-dialog-content>
+    <!-- Agence -->
+    <mat-form-field appearance="fill" class="full-width">
+      <mat-label>Agence</mat-label>
+      <mat-select formControlName="agence" required>
+        <mat-option *ngFor="let agence of data.agences" [value]="agence.idAgence">
+          {{ agence.nomAgence }}
+        </mat-option>
+      </mat-select>
+      <mat-error *ngIf="performanceForm.get('agence')?.hasError('required')">
+        Une agence est requise
+      </mat-error>
+    </mat-form-field>
+
+    <!-- Chiffre d'affaires -->
+    <mat-form-field appearance="fill" class="half-width">
+      <mat-label>Chiffre d'affaires (€)</mat-label>
+      <input matInput type="number" formControlName="chiffreAffaire" required>
+      <mat-error *ngIf="performanceForm.get('chiffreAffaire')?.hasError('required')">
+        Le chiffre d'affaires est requis
+      </mat-error>
+      <mat-error *ngIf="performanceForm.get('chiffreAffaire')?.hasError('min')">
+        Le chiffre d'affaires doit être positif
+      </mat-error>
+    </mat-form-field>
+
+    <!-- Nombre de contrats -->
+    <mat-form-field appearance="fill" class="half-width">
+      <mat-label>Nombre de contrats</mat-label>
+      <input matInput type="number" formControlName="nombreContrats" required>
+      <mat-error *ngIf="performanceForm.get('nombreContrats')?.hasError('required')">
+        Le nombre de contrats est requis
+      </mat-error>
+      <mat-error *ngIf="performanceForm.get('nombreContrats')?.hasError('min')">
+        Le nombre de contrats doit être positif
+      </mat-error>
+    </mat-form-field>
+
+    <!-- Date début -->
+    <mat-form-field appearance="fill" class="half-width">
+      <mat-label>Date de début</mat-label>
+      <input matInput [matDatepicker]="dateDebutPicker" formControlName="dateDebut" required>
+      <mat-datepicker-toggle matSuffix [for]="dateDebutPicker"></mat-datepicker-toggle>
+      <mat-datepicker #dateDebutPicker></mat-datepicker>
+      <mat-error *ngIf="performanceForm.get('dateDebut')?.hasError('required')">
+        La date de début est requise
+      </mat-error>
+    </mat-form-field>
+
+    <!-- Date fin -->
+    <mat-form-field appearance="fill" class="half-width">
+      <mat-label>Date de fin</mat-label>
+      <input matInput [matDatepicker]="dateFinPicker" formControlName="dateFin" required>
+      <mat-datepicker-toggle matSuffix [for]="dateFinPicker"></mat-datepicker-toggle>
+      <mat-datepicker #dateFinPicker></mat-datepicker>
+      <mat-error *ngIf="performanceForm.get('dateFin')?.hasError('required')">
+        La date de fin est requise
+      </mat-error>
+    </mat-form-field>
+  </mat-dialog-content>
+
+  <mat-dialog-actions align="end">
+    <button mat-button type="button" (click)="onCancel()">Annuler</button>
+    <button mat-raised-button color="primary" type="submit" [disabled]="performanceForm.invalid">
+      {{ data.isEditMode ? 'Modifier' : 'Ajouter' }}
+    </button>
+  </mat-dialog-actions>
+</form> 

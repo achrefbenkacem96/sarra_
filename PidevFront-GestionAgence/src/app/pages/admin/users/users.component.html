@@ -1,0 +1,104 @@
+<!-- Search Bar -->
+<div class="search-container">
+  <i class="fa fa-search search-icon"></i>
+  <input type="text" placeholder="Search users" [(ngModel)]="search_item">
+</div>
+
+<div class="user-list-container">
+  <h1>User List</h1>
+
+  <!-- Loading Indicator -->
+  <div *ngIf="loading" class="loading">
+    Loading users...
+  </div>
+
+  <!-- Error Message -->
+  <div *ngIf="error" class="error-message">
+    {{ error }}
+  </div>
+
+  <!-- Card View Container -->
+  <div class="cards-container">
+    <div *ngFor="let user of filterUsers()" class="card">
+      <!-- Card Actions: Three dots menu -->
+      <div class="card-actions">
+        <button class="menu-button" (click)="toggleMenu(user)">&#8942;</button>
+        <div class="dropdown-menu" *ngIf="user.showMenu">
+          <ul>
+            <li (click)="openUpdateModal(user)">
+              <i class="fa fa-edit"></i> Update
+            </li>
+            <li (click)="deleteUser(user)">
+              <i class="fa fa-trash"></i> Delete
+            </li>
+          </ul>
+        </div>
+      </div>
+      
+      <!-- User Image -->
+      <img
+        class="card-image"
+        [src]="user.image ? user.image : 'assets/images/default-user.png'"
+        [alt]="user.name"
+      >
+      <!-- Card Content -->
+      <div class="card-content">
+        <h2>{{ user.name }}</h2>
+        <p><strong>Email:</strong> {{ user.email }}</p>
+        <p><strong>CIN:</strong> {{ user.cin }}</p>
+        <p *ngIf="user.location"><strong>Location:</strong> {{ user.location }}</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Update User Modal -->
+<!-- Update User Modal -->
+<div class="modal-overlay" *ngIf="selectedUser">
+  <div class="modal">
+    <span class="close" (click)="closeUpdateModal()">&times;</span>
+    <h2>Update User</h2>
+
+    <!-- Success Message -->
+    <div *ngIf="successMessage" class="success-message">
+      {{ successMessage }}
+    </div>
+
+    <form (ngSubmit)="submitUpdate()">
+      <div class="form-group">
+        <label for="name">Name:</label>
+        <input type="text" id="name" [(ngModel)]="selectedUser.name" name="name" required>
+      </div>
+      <div class="form-group">
+        <label for="email">Email:</label>
+        <input type="email" id="email" [(ngModel)]="selectedUser.email" name="email" required>
+      </div>
+      <div class="form-group">
+        <label for="location">Location:</label>
+        <input type="text" id="location" [(ngModel)]="selectedUser.location" name="location">
+      </div>
+      <div class="form-group">
+        <label for="password">Password:</label>
+        <input 
+          type="password" 
+          id="password" 
+          [(ngModel)]="selectedUser.password" 
+          name="password">
+      </div>
+      <!-- File Input for Image Update -->
+      <div class="form-group">
+        <label for="image">Profile Image:</label>
+        <input type="file" id="image" (change)="onImageSelected($event)">
+      </div>
+      <!-- Image Preview -->
+      <div class="form-group" *ngIf="imagePreview">
+        <label>Image Preview:</label>
+        <img [src]="imagePreview" alt="Image Preview" class="preview-image">
+      </div>
+      <!-- Submit Button -->
+      <button type="submit" class="update-btn">Update User</button>
+    </form>
+  </div>
+</div>
+
+

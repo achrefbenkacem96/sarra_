@@ -1,0 +1,55 @@
+<mat-toolbar class="topbar" style="display: flex; justify-content: space-between; align-items: center;">
+  <!-- Left Section: Mobile Menu -->
+  <div class="toolbar-section left-section" style="display: flex; align-items: center;">
+    <button mat-icon-button (click)="toggleMobileNav.emit()" *ngIf="!showToggle">
+      <i-tabler name="menu-2" class="icon-20 d-flex"></i-tabler>
+    </button>
+  </div>
+
+  <!-- Center Section: Welcome Text -->
+  <div class="toolbar-section center-section" style="flex: 1; text-align: center; margin-top: 10px;">
+    <span class="welcome-text"
+          style="color: #f38f1d; font-size: 1.2rem; font-weight: 600;">
+      Bienvenue dans le dashboard admin 
+    </span>
+  </div>
+
+  <!-- Right Section: Profile Dropdown -->
+  <div class="toolbar-section right-section" style="display: flex; align-items: center;">
+    <button mat-icon-button [matMenuTriggerFor]="profilemenu" aria-label="Notifications">
+      <!-- Increased width from 50px to 70px for a larger image -->
+      <img src="/assets/images/profile/user-1.jpg"
+           class="rounded-circle object-cover"
+           width="140"
+           alt="User Profile" />
+    </button>
+    <mat-menu #profilemenu="matMenu" class="topbar-dd cardWithShadow">
+      <button mat-menu-item>
+        <mat-icon class="d-flex align-items-center">
+          <i-tabler name="user" class="icon-18 d-flex"></i-tabler>
+        </mat-icon>
+        My Profile
+      </button>
+      <button mat-menu-item>
+        <mat-icon class="d-flex align-items-center">
+          <i-tabler name="mail" class="icon-18 d-flex"></i-tabler>
+        </mat-icon>
+        My Account
+      </button>
+      <button mat-menu-item>
+        <mat-icon class="d-flex align-items-center">
+          <i-tabler name="list-check" class="icon-18 d-flex"></i-tabler>
+        </mat-icon>
+        My Task
+      </button>
+      <div class="p-x-12 m-t-12">
+        <a [routerLink]="['/authentication/login']"
+           mat-stroked-button
+           color="primary"
+           class="w-100">
+          Logout
+        </a>
+      </div>
+    </mat-menu>
+  </div>
+</mat-toolbar>
